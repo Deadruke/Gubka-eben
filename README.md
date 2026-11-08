@@ -1,6 +1,6 @@
 # Gubka-eben
 
-Простой Telegram-бот на Python с использованием **aiogram 3**.
+Простой Telegram-бот на Python с использованием **pyTelegramBotAPI** (telebot).
 
 ## Функционал
 
@@ -33,13 +33,23 @@
    TELEGRAM_TOKEN=ваш_токен_от_BotFather
    ```
 
-## Запуск
+## Запуск на Render (Web Service)
+
+1. **Type:** Web Service (не Background Worker!)
+2. **Build Command:** `pip install -r requirements.txt`
+3. **Start Command:** `python main.py`
+4. **Environment Variables:**
+   - `TELEGRAM_TOKEN` — токен бота
+   - `RENDER_EXTERNAL_URL` — автоматически устанавливается Render (например, `https://gubka-eben.onrender.com`)
+5. Деплой.
+
+## Запуск локально
 
 ```bash
 python main.py
 ```
 
-Бот начнет опрашивать обновления (long polling). Для остановки нажмите `Ctrl+C`.
+Бот будет работать в режиме long polling.
 
 ## Структура проекта
 
@@ -53,5 +63,6 @@ Gubka-eben/
 
 ## Примечания
 
-- Токен **никогда не коммитьте** в репозиторий. Используйте `.env` (добавлен в `.gitignore` при необходимости).
-- Бот использует `aiogram 3.13.1` и `python-dotenv` для загрузки переменных окружения.
+- Токен **никогда не коммитите** в репозиторий. Используйте `.env` (добавлен в `.gitignore` при необходимости).
+- Для Render Web Service бот использует `flask` для обработки вебхуков, что позволяет избежать ошибок `metadata-generation-failed` и `maturin`, связанных с `aiogram`.
+- Если вы хотите использовать `aiogram` на Render, вам понадобится платный тариф или VPS с записью в файловую систему.
